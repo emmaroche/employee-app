@@ -26,27 +26,34 @@ fun employeeInfo(){
     val grossPay = (monthlySalary + (annualBonus/12))
     val totalDeductions = (monthlyPrsi + monthlyPrsi + ctwS)
 
-    println ("\n|==================================================================|")
-    println ("|                    Monthly Payslip                               |")
-    println ("|==================================================================|")
-    println ("|                                                                  |" )
-    println ("|  Employee Name:  ${firstName.uppercase()}  ${lastName.uppercase()} ($gender)           Employee ID: $employeeId       |")
-    println ("|                                                                  |" )
-    println ("|==================================================================|")
-    println ("|                                                                  |" )
-    println ("| Payment Details  " + "\t\t\t   Deduction Details                   |" )
-    println ("|                                                                  |" )
-    println ("|==================================================================|")
-    println ("|                                                                  |" )
-    println("| Salary: ${roundToTwoDecimalPlaces(monthlySalary)}  \t\t\t   PAYE: ${roundToTwoDecimalPlaces(monthlyPaye)}                       |")
-    println("| Bonus:  ${roundToTwoDecimalPlaces(annualBonus / 12)}     \t\t   PRSI: ${roundToTwoDecimalPlaces(monthlyPrsi)}                        |")
-    println( "| \t\t\t\t\t\t\t   Cycle to work: $ctwS                |")
-    println ("|                                                                  |" )
-    println ("|==================================================================|")
-    println("| Gross: ${roundToTwoDecimalPlaces(grossPay)} \t\t\t   Total Deductions: ${roundToTwoDecimalPlaces(totalDeductions)}             |" )
-    println ("|==================================================================|")
-    println("| \t\t\t\tNet pay:  ${roundToTwoDecimalPlaces(grossPay - totalDeductions)}                                  |")
-    println ("|==================================================================|")
+    println ( """
+     |==================================================================|
+     |                        Monthly Payslip                           |
+     |==================================================================|
+     |                                                                  |
+     |  Employee Name:  ${firstName.uppercase()}  ${lastName.uppercase()} ($gender)           Employee ID: $employeeId       |
+     |                                                                  |
+     |==================================================================|
+     |                                                                  | 
+     | Payment Details:                                                 |
+     |                                                                  |
+     | Gross: ${roundToTwoDecimalPlaces(grossPay)}                                                   |
+     | Salary: ${roundToTwoDecimalPlaces(monthlySalary)}                                                   |           
+     | Bonus:  ${roundToTwoDecimalPlaces(annualBonus / 12)}                                                   |
+     |                                                                  |
+     |==================================================================|                                                                 | 
+     |                                                                  | 
+     | Deduction Details:                                               |
+     |                                                                  |
+     | Total Deductions: ${roundToTwoDecimalPlaces(totalDeductions)}                                          |
+     | PAYE: ${roundToTwoDecimalPlaces(monthlyPaye)}                                                    |     
+     | PRSI: ${roundToTwoDecimalPlaces(monthlyPrsi)}                                                     |
+     | Cycle to work: $ctwS                                             |
+     |                                                                  | 
+     |==================================================================|
+     | Net pay:  ${roundToTwoDecimalPlaces(grossPay - totalDeductions)}                                                |
+     |==================================================================|
+     """)
 
 }
 
