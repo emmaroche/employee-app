@@ -9,15 +9,40 @@ val payePercentage = 38.5
 val prsiPercentage = 5.2
 val annualBonus =  1450.50
 val ctwS = 54.33
-fun main(args: Array<String>) {
-    println(getFullEmployeeName())
-    println("Monthly Salary: ${getMonthlySalary()}")
-    println("Monthly PRSI: ${getMonthlyPrsi()}")
-    println("Monthly PAYE: ${getMonthlyPaye()}")
-    println("Monthly Gross Pay: ${getGrossPay()}")
-    println("Monthly Total Deductions: ${getTotalDeductions()}")
-    println("Monthly Net Pay: ${getMonthlyNetPay()}")
-    println(getEmployeeInfo())
+fun main(args: Array<String>){
+
+    var input : Int
+
+    do {
+        input = menu()
+        when(input) {
+            1 -> println("Monthly Salary: ${getMonthlySalary()}")
+            2 -> println("Monthly PRSI: ${getMonthlyPrsi()}")
+            3 ->println("Monthly PAYE: ${getMonthlyPaye()}")
+            4 -> println("Monthly Gross Pay: ${getGrossPay()}")
+            5 -> println("Monthly Total Deductions: ${getTotalDeductions()}")
+            6 -> println("Monthly Net Pay: ${getMonthlyNetPay()}")
+            7 -> println(getEmployeeInfo())
+            -1 -> println("Exiting App")
+            else -> println("Invalid Option")
+        }
+        println()
+    } while (input != -1)
+}
+
+fun menu() : Int {
+    print("""
+         Employee Menu for ${getFullEmployeeName()}
+           1. Monthly Salary
+           2. Monthly PRSI
+           3. Monthly PAYE
+           4. Monthly Gross Pay
+           5. Monthly Total Deductions
+           6. Monthly Net Pay
+           7. Full Payslip
+          -1. Exit
+         Enter Option : """)
+    return readLine()!!.toInt()
 }
 fun getFullEmployeeName() = when (gender){
      "M" -> "Mr. $firstName $lastName"
