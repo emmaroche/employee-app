@@ -11,25 +11,28 @@ val annualBonus =  1450.50
 val ctwS = 54.33
 fun main(args: Array<String>) {
     println("Pay slip printer")
-
     employeeInfo()
-    println("\n")
     getFullEmployeeName()
-
+    println("Monthly Salary: ${getMonthlySalary()}")
+    println("Monthly PRSI: ${getMonthlyPrsi()}")
+    println("Monthly PAYE: ${getMonthlyPaye()}")
+    println("Monthly Gross Pay: ${getGrossPay()}")
+    println("Monthly Total Deductions: ${getTotalDeductions()}")
+    println("Monthly Net Pay: ${getMonthlyNetPay()}")
 }
-
 fun getFullEmployeeName() = when (gender){
      "M" -> "Mr. $firstName $lastName"
      "F" -> "Ms. $firstName $lastName"
     else -> "$firstName $lastName"
 }
-fun employeeInfo(){
 
-    val monthlySalary = (grossSalary/12)
-    val monthlyPrsi = monthlySalary * (prsiPercentage / 100)
-    val monthlyPaye = monthlySalary * (payePercentage / 100)
-    val grossPay = (monthlySalary + (annualBonus/12))
-    val totalDeductions = (monthlyPrsi + monthlyPrsi + ctwS)
+fun getMonthlySalary() = roundToTwoDecimalPlaces(grossSalary/12)
+fun getMonthlyPaye() = roundToTwoDecimalPlaces(getMonthlySalary() * (payePercentage / 100))
+fun getMonthlyPrsi() = roundToTwoDecimalPlaces(getMonthlySalary() * (prsiPercentage / 100))
+fun getGrossPay() = roundToTwoDecimalPlaces(getMonthlySalary() + (annualBonus/12))
+fun getTotalDeductions() = roundToTwoDecimalPlaces(getMonthlyPrsi() + getMonthlyPaye() + ctwS)
+fun getMonthlyNetPay() = roundToTwoDecimalPlaces(roundToTwoDecimalPlaces(getGrossPay() - getTotalDeductions()))
+fun employeeInfo(){
 
     println ( """
      |==================================================================|
@@ -42,21 +45,21 @@ fun employeeInfo(){
      |                                                                  | 
      | Payment Details:                                                 |
      |                                                                  |
-     | Gross: ${roundToTwoDecimalPlaces(grossPay)}                                                   |
-     | Salary: ${roundToTwoDecimalPlaces(monthlySalary)}                                                   |           
+     | Gross: ${getGrossPay()}                                                   |
+     | Salary: ${getMonthlySalary()}                                                   |           
      | Bonus:  ${roundToTwoDecimalPlaces(annualBonus / 12)}                                                   |
      |                                                                  |
      |==================================================================|                                                                 | 
      |                                                                  | 
      | Deduction Details:                                               |
      |                                                                  |
-     | Total Deductions: ${roundToTwoDecimalPlaces(totalDeductions)}                                          |
-     | PAYE: ${roundToTwoDecimalPlaces(monthlyPaye)}                                                    |     
-     | PRSI: ${roundToTwoDecimalPlaces(monthlyPrsi)}                                                     |
+     | Total Deductions: ${getTotalDeductions()}                                        |
+     | PAYE: ${getMonthlyPaye()}                                                    |     
+     | PRSI: ${getMonthlyPrsi()}                                                     |
      | Cycle to work: $ctwS                                             |
      |                                                                  | 
      |==================================================================|
-     | Net pay:  ${roundToTwoDecimalPlaces(grossPay - totalDeductions)}                                                |
+     | Net pay:  ${getMonthlyNetPay()}                                                |
      |==================================================================|
      """)
 
