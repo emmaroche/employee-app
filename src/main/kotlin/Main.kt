@@ -10,15 +10,14 @@ val prsiPercentage = 5.2
 val annualBonus =  1450.50
 val ctwS = 54.33
 fun main(args: Array<String>) {
-    println("Pay slip printer")
-    employeeInfo()
-    getFullEmployeeName()
+    println(getFullEmployeeName())
     println("Monthly Salary: ${getMonthlySalary()}")
     println("Monthly PRSI: ${getMonthlyPrsi()}")
     println("Monthly PAYE: ${getMonthlyPaye()}")
     println("Monthly Gross Pay: ${getGrossPay()}")
     println("Monthly Total Deductions: ${getTotalDeductions()}")
     println("Monthly Net Pay: ${getMonthlyNetPay()}")
+    println(getEmployeeInfo())
 }
 fun getFullEmployeeName() = when (gender){
      "M" -> "Mr. $firstName $lastName"
@@ -32,7 +31,7 @@ fun getMonthlyPrsi() = roundToTwoDecimalPlaces(getMonthlySalary() * (prsiPercent
 fun getGrossPay() = roundToTwoDecimalPlaces(getMonthlySalary() + (annualBonus/12))
 fun getTotalDeductions() = roundToTwoDecimalPlaces(getMonthlyPrsi() + getMonthlyPaye() + ctwS)
 fun getMonthlyNetPay() = roundToTwoDecimalPlaces(roundToTwoDecimalPlaces(getGrossPay() - getTotalDeductions()))
-fun employeeInfo(){
+fun getEmployeeInfo(){
 
     println ( """
      |==================================================================|
