@@ -1,24 +1,29 @@
 import kotlin.math.round
+
+val firstName = "Joe"
+val lastName = "Soap"
+val gender = "M"
+val employeeId = 6143
+val grossSalary = 67543.21
+val payePercentage = 38.5
+val prsiPercentage = 5.2
+val annualBonus =  1450.50
+val ctwS = 54.33
 fun main(args: Array<String>) {
     println("Pay slip printer")
 
     employeeInfo()
     println("\n")
-//    employeeInfo2()
+    getFullEmployeeName()
 
 }
 
+fun getFullEmployeeName() = when (gender){
+     "M" -> "Mr. $firstName $lastName"
+     "F" -> "Ms. $firstName $lastName"
+    else -> "$firstName $lastName"
+}
 fun employeeInfo(){
-
-    val firstName = "Joe"
-    val lastName = "Soap"
-    val gender = "M"
-    val employeeId = 6143
-    val grossSalary = 67543.21
-    val payePercentage = 38.5
-    val prsiPercentage = 5.2
-    val annualBonus =  1450.50
-    val ctwS = 54.33
 
     val monthlySalary = (grossSalary/12)
     val monthlyPrsi = monthlySalary * (prsiPercentage / 100)
@@ -31,7 +36,7 @@ fun employeeInfo(){
      |                        Monthly Payslip                           |
      |==================================================================|
      |                                                                  |
-     |  Employee Name:  ${firstName.uppercase()}  ${lastName.uppercase()} ($gender)           Employee ID: $employeeId       |
+     |  Employee Name:  ${getFullEmployeeName()}            Employee ID: $employeeId       |
      |                                                                  |
      |==================================================================|
      |                                                                  | 
@@ -59,7 +64,7 @@ fun employeeInfo(){
 
 fun roundToTwoDecimalPlaces(number: Double) = round(number * 100) / 100
 
-//Initial two decimal place payslip
+//Initial two decimal place payslip code
 //fun employeeInfo2(){
 //
 //    val firstName = "Joe"
