@@ -1,18 +1,18 @@
 package ie.setu
+
+import kotlin.math.round
 import ie.setu.controllers.EmployeeAPI
 import ie.setu.models.Employee
-import kotlin.math.round
 import mu.KotlinLogging
 
 val logger = KotlinLogging.logger {}
 var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 var employees = EmployeeAPI()
+
 fun main(args: Array<String>){
     logger.info { "Launching Employee App" }
     start()
 }
-
-
 fun menu() : Int {
     print(""" 
          |Employee Menu
@@ -25,7 +25,6 @@ fun menu() : Int {
          |Enter Option : """.trimMargin())
     return readLine()!!.toInt()
 }
-
 fun start() {
     var input: Int
 
@@ -43,7 +42,6 @@ fun start() {
         println()
     } while (input != -1)
 }
-
 fun add(){
     print("Enter First name: ")
     val firstName = readLine().toString()
@@ -89,9 +87,9 @@ fun paySlip(){
         println(employee.getEmployeeInfo())
 }
 fun dummyData() {
-    employees.create(Employee("Joe", "Soap", 'm', 0, 35655.43, 31.0, 7.5, 2000.0, 25.6))
-    employees.create(Employee("Joan", "Murphy", 'f', 0, 54255.13, 32.5, 7.0, 1500.0, 55.3))
-    employees.create(Employee("Mary", "Quinn", 'f', 0, 75685.41, 40.0, 8.5, 4500.0, 0.0))
+    employees.create(Employee("Cian", "Burns", 'M', 1, 35655.43, 31.0, 7.5, 2000.0, 25.6))
+    employees.create(Employee("Emma", "Roche", 'F', 2, 54255.13, 32.5, 7.0, 1500.0, 55.3))
+    employees.create(Employee("John", "Walsh", 'M', 3, 75685.41, 40.0, 8.5, 4500.0, 0.0))
 }
 fun roundToTwoDecimalPlaces(number: Double) = round(number * 100) / 100
 

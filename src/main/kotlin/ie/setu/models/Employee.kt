@@ -18,9 +18,9 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
     fun getGrossPay() = roundToTwoDecimalPlaces(getMonthlySalary() + (employee.annualBonus / 12))
     fun getTotalDeductions() = roundToTwoDecimalPlaces(getMonthlyPrsi() + getMonthlyPaye() + employee.ctwS)
     fun getMonthlyNetPay() = roundToTwoDecimalPlaces(roundToTwoDecimalPlaces(getGrossPay() - getTotalDeductions()))
-    fun getEmployeeInfo(){
+    fun getEmployeeInfo() : String {
 
-        println ( """
+        return """
      |==================================================================|
      |                        Monthly Payslip                           |
      |==================================================================|
@@ -47,12 +47,15 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
      |==================================================================|
      | Net pay:  ${getMonthlyNetPay()}                                                |
      |==================================================================|
-     """)
-
+     """
     }
+
 
     override fun toString(): String {
-        return "Employee(firstName='$firstName', lastName='$lastName', gender=$gender, employeeID=$employeeId, grossSalary=$grossSalary, payePercentage=$payePercentage, prsiPercentage=$prsiPercentage, annualBonus=$annualBonus, cycleToWorkMonthlyDeduction=$ctwS)"
+        return "\nEmployee ID: $employeeId \tName: $firstName $lastName ($gender)" +
+                "\n--------------------------------------" + " \nGross Salary: $grossSalary | PAYE Percentage: $payePercentage | PRSI Percentage: $prsiPercentage | Annual Bonus: $annualBonus | Cycle To Work MonthlyDeduction: $ctwS \n "
     }
+
+
 }
 
