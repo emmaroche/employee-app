@@ -16,6 +16,7 @@ fun main(args: Array<String>){
     var input : Int
 
     do {
+        add()
         input = menu()
         when(input) {
             1 -> println("Monthly Salary: ${getMonthlySalary()}")
@@ -46,9 +47,32 @@ fun menu() : Int {
          Enter Option : """)
     return readLine()!!.toInt()
 }
+
+fun add(){
+    print("Enter First name: ")
+    val firstName = readLine().toString()
+    print("Enter Surname: ")
+    val lastName = readLine().toString()
+    print("Enter Gender (m/f): ")
+    val gender = readLine()!!.toCharArray()[0]
+    print("Enter Employee ID: ")
+    val employeeId = readLine()!!.toInt()
+    print("Enter Gross Salary: ")
+    val grossSalary = readLine()!!.toDouble()
+    print("Enter PAYE %: ")
+    val payePercentage = readLine()!!.toDouble()
+    print("Enter PRSI %: ")
+    val prsiPercentage = readLine()!!.toDouble()
+    print("Enter Annual Bonus: ")
+    val annualBonus= readLine()!!.toDouble()
+    print("Enter Cycle to Work Deduction: ")
+    val ctwS= readLine()!!.toDouble()
+
+    employee = Employee(firstName, lastName, gender, employeeId, grossSalary, payePercentage, prsiPercentage, annualBonus, ctwS)
+}
 fun getFullEmployeeName() = when (employee.gender){
-     'M' -> "Mr. ${employee.firstName} ${employee.lastName}"
-     'F' -> "Ms. ${employee.firstName} ${employee.lastName}"
+    'm', 'M' -> "Mr. ${employee.firstName} ${employee.lastName}"
+    'f', 'F' -> "Ms. ${employee.firstName} ${employee.lastName}"
     else -> "${employee.firstName} ${employee.lastName}"
 }
 
