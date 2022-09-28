@@ -1,3 +1,8 @@
+package ie.setu.models
+
+import ie.setu.employee
+import ie.setu.roundToTwoDecimalPlaces
+
 class Employee(var firstName: String, var lastName: String, var gender: Char, var employeeId: Int,
                var grossSalary: Double, var payePercentage: Double, var prsiPercentage: Double,
                var annualBonus: Double, var ctwS: Double) {
@@ -7,10 +12,10 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
         'f', 'F' -> "Ms. ${firstName} ${lastName}"
         else -> "${firstName} ${lastName}"
     }
-    fun getMonthlySalary() = roundToTwoDecimalPlaces(employee.grossSalary/12)
+    fun getMonthlySalary() = roundToTwoDecimalPlaces(employee.grossSalary / 12)
     fun getMonthlyPaye() = roundToTwoDecimalPlaces(getMonthlySalary() * (employee.payePercentage / 100))
     fun getMonthlyPrsi() = roundToTwoDecimalPlaces(getMonthlySalary() * (employee.prsiPercentage / 100))
-    fun getGrossPay() = roundToTwoDecimalPlaces(getMonthlySalary() + (employee.annualBonus/12))
+    fun getGrossPay() = roundToTwoDecimalPlaces(getMonthlySalary() + (employee.annualBonus / 12))
     fun getTotalDeductions() = roundToTwoDecimalPlaces(getMonthlyPrsi() + getMonthlyPaye() + employee.ctwS)
     fun getMonthlyNetPay() = roundToTwoDecimalPlaces(roundToTwoDecimalPlaces(getGrossPay() - getTotalDeductions()))
     fun getEmployeeInfo(){
