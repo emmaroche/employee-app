@@ -71,11 +71,10 @@ fun add(){
     employees.create(Employee(firstName, lastName, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, ctwS))
 }
 
-
 fun list(){
-    println(employees.findAll())
+    employees.findAll()
+        .forEach{ println(it) }
 }
-
 fun search() {
     val employee = getEmployeeById()
     if (employee == null)
@@ -83,24 +82,20 @@ fun search() {
     else
         println(employee)
 }
-
 internal fun getEmployeeById(): Employee? {
     print("Enter the employee id to search by: ")
     val employeeID = readLine()!!.toInt()
     return employees.findOne(employeeID)
 }
-
 fun paySlip(){
     val employee = getEmployeeById()
     if (employee != null)
         println(employee.getEmployeeInfo())
 }
-
 fun dummyData() {
     employees.create(Employee("Joe", "Soap", 'm', 0, 35655.43, 31.0, 7.5, 2000.0, 25.6))
     employees.create(Employee("Joan", "Murphy", 'f', 0, 54255.13, 32.5, 7.0, 1500.0, 55.3))
     employees.create(Employee("Mary", "Quinn", 'f', 0, 75685.41, 40.0, 8.5, 4500.0, 0.0))
 }
-
 fun roundToTwoDecimalPlaces(number: Double) = round(number * 100) / 100
 

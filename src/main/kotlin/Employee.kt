@@ -20,7 +20,7 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
      |                        Monthly Payslip                           |
      |==================================================================|
      |                                                                  |
-     |  Employee Name:  ${getFullEmployeeName()}            Employee ID: ${employee.employeeId}      |
+     |  Employee Name:  ${getFullEmployeeName()}            Employee ID: ${employee.employeeId}     |
      |                                                                  |
      |==================================================================|
      |                                                                  | 
@@ -30,7 +30,7 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
      | Salary: ${getMonthlySalary()}                                                   |           
      | Bonus:  ${roundToTwoDecimalPlaces(employee.annualBonus / 12)}                                                   |
      |                                                                  |
-     |==================================================================|                                                                 | 
+     |==================================================================|                                                                  
      |                                                                  | 
      | Deduction Details:                                               |
      |                                                                  |
@@ -46,5 +46,8 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
 
     }
 
+    override fun toString(): String {
+        return "Employee(firstName='$firstName', lastName='$lastName', gender=$gender, employeeID=$employeeId, grossSalary=$grossSalary, payePercentage=$payePercentage, prsiPercentage=$prsiPercentage, annualBonus=$annualBonus, cycleToWorkMonthlyDeduction=$ctwS)"
+    }
 }
 
