@@ -43,7 +43,7 @@ fun start() {
             6 -> search()
             7 -> paySlip()
             -99 -> dummyData()
-            -1 -> println("Exiting App, thank you for using!")
+            -1 -> logger.info { "Exiting App, thank you for using!" } //println("Exiting App, thank you for using!")
             else -> println("Invalid Option")
         }
         println()
@@ -78,6 +78,7 @@ To add the functionality to update and delete employees from the list, I took in
 and changed the code around in order to make it work for what I needed it to do
 */
 fun updateEmployee() {
+    logger.info { "updateEmployee() function invoked\n" }
     list()
     if (employees.numberOfEmployees() > 0) {
         // only ask the user to choose the employee if employee exists
@@ -106,15 +107,16 @@ fun updateEmployee() {
             if (employees.updateEmployee(indexToUpdate, Employee(firstName, lastName, gender, employeeId, grossSalary,payePercentage, prsiPercentage, annualBonus, ctwS))) {
                 println("Employee information updated successfully")
             } else {
-                println("Update Failed")
+                logger.info { "Update Failed\n" }
             }
         } else {
-            println("There are no employees for this index number")
+            logger.info{"There are no employees for this index number\n"}
         }
     }
 }
 
 fun deleteEmployee() {
+    logger.info { "deleteEmployee() function invoked\n" }
     list()
     if (employees.numberOfEmployees() > 0) {
         // only ask the user to choose the note to delete if notes exist
@@ -124,7 +126,7 @@ fun deleteEmployee() {
         if (employeeToDelete != null) {
             println("Delete Successful! Deleted Employee: ${employeeToDelete.firstName}")
         } else {
-            println("Delete NOT Successful")
+            logger.info{"Delete NOT Successful"}
         }
     }
 }
@@ -132,7 +134,6 @@ fun list(){
     employees.findAll()
         .forEach{ println(it) }
 }
-
 fun sort(){
     employees.findAll()
         .forEach{ println(it) }
@@ -140,7 +141,7 @@ fun sort(){
 fun search() {
     val employee = getEmployeeById()
     if (employee == null)
-        println("No employee found")
+        logger.info{"No employee found\n"}
     else
         println(employee)
 }
