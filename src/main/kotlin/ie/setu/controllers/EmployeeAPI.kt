@@ -27,21 +27,32 @@ In order to add update and delete functionality, I took inspiration from certain
 and changed it to make it work for what I needed it to do
 */
     fun updateEmployee(indexToUpdate: Int, employee: Employee?): Boolean {
-        // find the note object by the index number
+        // find the employee by the index number
         val foundEmployee = findEmployee(indexToUpdate)
 
-        // if the note exists, use the note details passed as parameters to update the found note in the ArrayList.
+        // if the Employee exists, use the employee details passed as parameters to update the found employee in the ArrayList.
         if ((foundEmployee != null) && (employee != null)) {
             foundEmployee.firstName = employee.firstName
             foundEmployee.lastName= employee.lastName
             foundEmployee.gender = employee.gender
+            foundEmployee.employeeId = employee.employeeId
+            foundEmployee.grossSalary= employee.grossSalary
+            foundEmployee.payePercentage = employee.payePercentage
+            foundEmployee.prsiPercentage = employee.prsiPercentage
+            foundEmployee.annualBonus= employee.annualBonus
+            foundEmployee.ctwS = employee.ctwS
             return true
         }
 
-        // if the note was not found, return false, indicating that the update was not successful
+        // if the Employee was not found, return false, indicating that the update was not successful
         return false
     }
 
+    fun deleteEmployee(indexToDelete: Int): Employee? {
+        return if (isValidListIndex(indexToDelete, employees)) {
+            employees.removeAt(indexToDelete)
+        } else null
+    }
     fun findEmployee(index: Int): Employee? {
         return if (isValidListIndex(index, employees)) {
             employees[index]

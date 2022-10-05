@@ -37,13 +37,13 @@ fun start() {
         when (input) {
             1 -> add()
             2 -> updateEmployee()
-            3 -> delete()
+            3 -> deleteEmployee()
             4 -> list()
             5 -> sort()
             6 -> search()
             7 -> paySlip()
             -99 -> dummyData()
-            -1 -> println("Exiting App")
+            -1 -> println("Exiting App, thank you for using!")
             else -> println("Invalid Option")
         }
         println()
@@ -72,11 +72,10 @@ fun add(){
     employees.create(Employee(firstName, lastName, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, ctwS))
 }
 fun updateEmployee() {
-    // logger.info { "updateNotes() function invoked" }
     list()
     if (employees.numberOfEmployees() > 0) {
-        // only ask the user to choose the note if notes exist
-        val indexToUpdate = readNextInt("Enter the index of the Employee to update: ")
+        // only ask the user to choose the employee if employee exists
+        val indexToUpdate = readNextInt("Enter the ID of the Employee to update: ")
         if (employees.isValidIndex(indexToUpdate)) {
             print("Enter First name: ")
             val firstName = readLine().toString()
@@ -110,9 +109,19 @@ fun updateEmployee() {
     }
 }
 
-fun delete(){
-    employees.findAll()
-        .forEach{ println(it) }
+fun deleteEmployee() {
+    list()
+    if (employees.numberOfEmployees() > 0) {
+        // only ask the user to choose the note to delete if notes exist
+        val indexToDelete = readNextInt("Enter the ID of the Employee to delete: ")
+        // pass the index of the note to NoteAPI for deleting and check for success.
+        val employeeToDelete = employees.deleteEmployee(indexToDelete)
+        if (employeeToDelete != null) {
+            println("Delete Successful! Deleted Employee: ${employeeToDelete.firstName}")
+        } else {
+            println("Delete NOT Successful")
+        }
+    }
 }
 fun list(){
     employees.findAll()
