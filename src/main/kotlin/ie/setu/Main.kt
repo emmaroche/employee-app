@@ -4,7 +4,6 @@ import kotlin.math.round
 import ie.setu.controllers.EmployeeAPI
 import ie.setu.models.Employee
 import mu.KotlinLogging
-import ie.setu.utils.ScannerInput
 import ie.setu.utils.ScannerInput.readNextInt
 
 val logger = KotlinLogging.logger {}
@@ -22,7 +21,7 @@ fun menu() : Int {
          |   2. Update Employee
          |   3. Delete Employee
          |   4. List All Employees
-         |   4. Sort Employees
+         |   5. Sort Employees
          |   6. Search Employees 
          |   7. Print Payslip for Employee
          |  -1. Exit
@@ -72,11 +71,6 @@ fun add(){
 
     employees.create(Employee(firstName, lastName, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, ctwS))
 }
-
-//fun update(){
-//    employees.findAll()
-//        .forEach{ println(it) }
-//}
 fun updateEmployee() {
     // logger.info { "updateNotes() function invoked" }
     list()

@@ -1,5 +1,6 @@
 package ie.setu.utils
 
+//Code Reference: https://github.com/sdrohan/notes-app/blob/master/src/main/kotlin/utils/Utilities.kt
 object Utilities {
 
     @JvmStatic
