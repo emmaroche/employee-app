@@ -50,12 +50,9 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
      """
     }
 
-
     override fun toString(): String {
         return "\nEmployee ID: $employeeId \tName: $firstName $lastName ($gender)" +
                 "\n--------------------------------------" + " \nGross Salary: $grossSalary | PAYE Percentage: $payePercentage | PRSI Percentage: $prsiPercentage | Annual Bonus: $annualBonus | Cycle To Work MonthlyDeduction: $ctwS \n "
     }
-
-
 }
 

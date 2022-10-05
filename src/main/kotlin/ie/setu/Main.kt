@@ -17,9 +17,12 @@ fun menu() : Int {
     print(""" 
          |Employee Menu
          |   1. Add Employee
-         |   2. List All Employees
-         |   3. Search Employees 
-         |   4. Print Payslip for Employee
+         |   2. Update Employee
+         |   3. Delete Employee
+         |   4. List All Employees
+         |   4. Sort Employees
+         |   6. Search Employees 
+         |   7. Print Payslip for Employee
          |  -1. Exit
          |       
          |Enter Option : """.trimMargin())
@@ -32,9 +35,12 @@ fun start() {
         input = menu()
         when (input) {
             1 -> add()
-            2 -> list()
-            3 -> search()
-            4 -> paySlip()
+            2 -> update()
+            3 -> delete()
+            4 -> list()
+            5 -> sort()
+            6 -> search()
+            7 -> paySlip()
             -99 -> dummyData()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -65,7 +71,21 @@ fun add(){
     employees.create(Employee(firstName, lastName, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, ctwS))
 }
 
+fun update(){
+    employees.findAll()
+        .forEach{ println(it) }
+}
+
+fun delete(){
+    employees.findAll()
+        .forEach{ println(it) }
+}
 fun list(){
+    employees.findAll()
+        .forEach{ println(it) }
+}
+
+fun sort(){
     employees.findAll()
         .forEach{ println(it) }
 }
