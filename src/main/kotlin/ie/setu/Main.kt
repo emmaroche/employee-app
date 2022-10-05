@@ -71,6 +71,12 @@ fun add(){
 
     employees.create(Employee(firstName, lastName, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, ctwS))
 }
+
+/*
+Code Reference for updateEmployee() and deleteEmployee(): https://github.com/sdrohan/notes-app/blob/master/src/main/kotlin/Main.kt
+To add the functionality to update and delete employees from the list, I took inspiration from certain sections of the referenced code
+and changed the code around in order to make it work for what I needed it to do
+*/
 fun updateEmployee() {
     list()
     if (employees.numberOfEmployees() > 0) {
@@ -96,10 +102,9 @@ fun updateEmployee() {
             print("Enter Cycle to Work Deduction: ")
             val ctwS= readLine()!!.toDouble()
 
-
-            // pass the index of the note and the new note details to NoteAPI for updating and check for success.
+            // pass the index of the employee and the new employee details to EmployeeAPI for updating and check for success.
             if (employees.updateEmployee(indexToUpdate, Employee(firstName, lastName, gender, employeeId, grossSalary,payePercentage, prsiPercentage, annualBonus, ctwS))) {
-                println("Update Successful")
+                println("Employee information updated successfully")
             } else {
                 println("Update Failed")
             }

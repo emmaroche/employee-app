@@ -23,7 +23,7 @@ class EmployeeAPI {
     }
 /*
 Code Reference for code below this comment: https://github.com/sdrohan/notes-app/blob/master/src/main/kotlin/controllers/NoteAPI.kt
-In order to add update and delete functionality, I took inspiration from certain sections of the referneced code
+In order to add update and delete functionality, I took inspiration from certain sections of the referenced code
 and changed it to make it work for what I needed it to do
 */
     fun updateEmployee(indexToUpdate: Int, employee: Employee?): Boolean {
