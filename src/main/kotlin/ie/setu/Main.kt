@@ -4,6 +4,8 @@ import kotlin.math.round
 import ie.setu.controllers.EmployeeAPI
 import ie.setu.models.Employee
 import mu.KotlinLogging
+import ie.setu.utils.ScannerInput
+import ie.setu.utils.ScannerInput.readNextInt
 
 val logger = KotlinLogging.logger {}
 var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
@@ -35,7 +37,7 @@ fun start() {
         input = menu()
         when (input) {
             1 -> add()
-            2 -> update()
+            2 -> updateEmployee()
             3 -> delete()
             4 -> list()
             5 -> sort()
@@ -71,9 +73,47 @@ fun add(){
     employees.create(Employee(firstName, lastName, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, ctwS))
 }
 
-fun update(){
-    employees.findAll()
-        .forEach{ println(it) }
+//fun update(){
+//    employees.findAll()
+//        .forEach{ println(it) }
+//}
+fun updateEmployee() {
+    // logger.info { "updateNotes() function invoked" }
+    list()
+    if (employees.numberOfEmployees() > 0) {
+        // only ask the user to choose the note if notes exist
+        val indexToUpdate = readNextInt("Enter the index of the Employee to update: ")
+        if (employees.isValidIndex(indexToUpdate)) {
+            print("Enter First name: ")
+            val firstName = readLine().toString()
+            print("Enter Surname: ")
+            val lastName = readLine().toString()
+            print("Enter Gender (m/f): ")
+            val gender = readLine()!!.toCharArray()[0]
+            print("Enter Employee ID: ")
+            val employeeId = readLine()!!.toInt()
+            print("Enter Gross Salary: ")
+            val grossSalary = readLine()!!.toDouble()
+            print("Enter PAYE %: ")
+            val payePercentage = readLine()!!.toDouble()
+            print("Enter PRSI %: ")
+            val prsiPercentage = readLine()!!.toDouble()
+            print("Enter Annual Bonus: ")
+            val annualBonus= readLine()!!.toDouble()
+            print("Enter Cycle to Work Deduction: ")
+            val ctwS= readLine()!!.toDouble()
+
+
+            // pass the index of the note and the new note details to NoteAPI for updating and check for success.
+            if (employees.updateEmployee(indexToUpdate, Employee(firstName, lastName, gender, employeeId, grossSalary,payePercentage, prsiPercentage, annualBonus, ctwS))) {
+                println("Update Successful")
+            } else {
+                println("Update Failed")
+            }
+        } else {
+            println("There are no employees for this index number")
+        }
+    }
 }
 
 fun delete(){
