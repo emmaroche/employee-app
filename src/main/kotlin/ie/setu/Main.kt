@@ -6,28 +6,45 @@ import ie.setu.models.Employee
 import mu.KotlinLogging
 import ie.setu.utils.ScannerInput.readNextInt
 
+
 val logger = KotlinLogging.logger {}
 var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 var employees = EmployeeAPI()
 
+
+
 fun main(args: Array<String>){
-    logger.info { "Launching Employee App" }
+    logger.info { "Launching Employee App\n" }
     start()
+
 }
 fun menu() : Int {
+    // Displays the called colour
+    val backgroundGreen = "\u001b[42m"
+    val  backgroundBlue = "\u001b[44m"
+    val black = "\u001b[30m"
+    val bold = "\u001b[1m"
+    val backgroundBrightGreen = "\u001b[42;1m"
+
+   // Resets back to previous colour
+    val reset = "\u001b[0m"
+
     print(""" 
-         |Employee Menu
-         |   1. Add Employee
-         |   2. Update Employee
-         |   3. Delete Employee
-         |   4. List All Employees
-         |   5. Sort Employees
-         |   6. Search Employees 
-         |   7. Print Payslip for Employee
-         |  -1. Exit
-         |       
-         |Enter Option : """.trimMargin())
+         |   $backgroundBlue$black ️         $bold$black   Employee Menu             $reset 
+         |   $backgroundBlue   $reset 1 → 👩‍💼Add Employee               $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 2 → ✏️Update Employee            $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 3 → 🗑Delete Employee            $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 4 → 📝List All Employees         $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 5 → 📝Sort Employees             $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 6 → 🔎Search Employees           $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 7 → 🖨Print Payslip for Employee $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 0 → 👋Exit                       $backgroundBlue   $reset
+         |   $backgroundBlue                   💼                   $reset
+         |   
+         |   Enter Option: """.trimMargin())
+
     return readLine()!!.toInt()
+
 }
 fun start() {
     var input: Int
@@ -43,11 +60,11 @@ fun start() {
             6 -> search()
             7 -> paySlip()
             -99 -> dummyData()
-            -1 -> logger.info { "Exiting App, thank you for using!" } //println("Exiting App, thank you for using!")
-            else -> println("Invalid Option")
+            0 -> logger.info { "Exiting App, thank you for using!\n" } //println("Exiting App, thank you for using!")
+            else -> logger.info{"Invalid Option\n"}
         }
         println()
-    } while (input != -1)
+    } while (input != 0)
 }
 fun add(){
     print("Enter First name: ")
@@ -121,7 +138,7 @@ fun deleteEmployee() {
     if (employees.numberOfEmployees() > 0) {
         // only ask the user to choose the note to delete if notes exist
         val indexToDelete = readNextInt("Enter the ID of the Employee to delete: ")
-        // pass the index of the note to NoteAPI for deleting and check for success.
+        // pass the index of the note to EmployeeAPI for deleting and check for success.
         val employeeToDelete = employees.deleteEmployee(indexToDelete)
         if (employeeToDelete != null) {
             println("Delete Successful! Deleted Employee: ${employeeToDelete.firstName}")
