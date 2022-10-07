@@ -1,7 +1,6 @@
 package ie.setu.models
 
 import ie.setu.employee
-import ie.setu.logger
 import ie.setu.roundToTwoDecimalPlaces
 
 class Employee(var firstName: String, var lastName: String, var gender: Char, var employeeId: Int,

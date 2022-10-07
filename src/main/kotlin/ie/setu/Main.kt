@@ -15,6 +15,13 @@ fun main(args: Array<String>){
     start()
 }
 fun menu() : Int {
+
+    /* Code Reference for what I used to add colour to parts of my functions:
+    https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#deletion
+    To improve the UX/UI of my employee app, I added colours to parts of my menu, payslip and list functions
+    by using and adapting the referenced code to suit my project
+    */
+
     // Displays the colour
     val backgroundBlue = "\u001b[44m"
     val black = "\u001b[30m"
