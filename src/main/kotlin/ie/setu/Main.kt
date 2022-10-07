@@ -8,7 +8,7 @@ import ie.setu.utils.ScannerInput.readNextInt
 
 
 val logger = KotlinLogging.logger {}
-var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
+//var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 var employees = EmployeeAPI()
 fun main(args: Array<String>){
     logger.info { "Launching Employee App\n" }
@@ -37,8 +37,8 @@ fun menu() : Int {
          |   $backgroundBlue   $reset 2 → ✏️Update Employee            $backgroundBlue   $reset
          |   $backgroundBlue   $reset 3 → 🗑Delete Employee            $backgroundBlue   $reset
          |   $backgroundBlue   $reset 4 → 📝List All Employees         $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 5 → 📝Sort Employees             $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 6 → 🔎Search Employees           $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 5 → 🔎Search Employees           $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 6 → 🔎Search Employees by name   $backgroundBlue   $reset
          |   $backgroundBlue   $reset 7 → 🖨Print Payslip for Employee $backgroundBlue   $reset
          |   $backgroundBlue   $reset 0 → 👋Exit                       $backgroundBlue   $reset
          |   $backgroundBlue                   💼                   $reset
@@ -58,8 +58,8 @@ fun start() {
             2 -> updateEmployee()
             3 -> deleteEmployee()
             4 -> list()
-            5 -> sort()
-            6 -> search()
+            5 -> search()
+            6 -> searchByName()
             7 -> paySlip()
             -99 -> dummyData()
             0 -> logger.info { "Exiting App, thank you for using!\n" } //println("Exiting App, thank you for using!")
@@ -134,7 +134,6 @@ fun updateEmployee() {
     }
 }
 fun deleteEmployee() {
-    logger.info { "deleteEmployee() function invoked\n" }
     list()
     if (employees.numberOfEmployees() > 0) {
         // only ask the user to choose the note to delete if notes exist
@@ -153,20 +152,11 @@ fun list(){
     val black = "\u001b[30m"
     val bold = "\u001b[1m"
     val reset = "\u001b[0m"
-    logger.info { "Listing All Employees\n" }
     print("\n   $backgroundBlue$black$bold Employee List $reset\n")
         employees.findAll()
             .forEach{ println(it) }
 
 }
-fun sort(){
-    if (employee != null) {
-        logger.info { "No employee found\n" }
-    }
-    else{
-            employees.findAll()
-                .forEach{ println(it) }}
-    }
 fun search() {
     val employee = getEmployeeById()
     if (employee == null)
@@ -174,10 +164,23 @@ fun search() {
     else
         println(employee)
 }
+fun searchByName()
+{
+    val employeeName = getEmployeeByName()
+    if (employeeName == null)
+        logger.info{"No employee found\n"}
+    else
+        println(employeeName)
+}
 internal fun getEmployeeById(): Employee? {
     print("   Enter the employee id to search by: ")
     val employeeID = readLine()!!.toInt()
     return employees.findOne(employeeID)
+}
+internal fun getEmployeeByName(): Employee? {
+    print("   Enter the employee name to search by: ")
+    val employeeName = readLine()!!.toString()
+    return employees.findName(employeeName)
 }
 fun paySlip(){
     val employee = getEmployeeById()

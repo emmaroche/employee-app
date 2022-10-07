@@ -17,6 +17,9 @@ class EmployeeAPI {
     fun findOne(id: Int): Employee? {
         return employees.find { p -> p.employeeId == id }
     }
+    fun findName(name: String): Employee? {
+        return employees.find { p -> p.firstName == name }
+    }
     fun create(employee: Employee) {
         employee.employeeId = getId()
         employees.add(employee)
@@ -58,6 +61,7 @@ and changed it to make it work for what I needed it to do
             employees[index]
         } else null
     }
+
     fun isValidIndex(index: Int): Boolean {
         return isValidListIndex(index, employees)
     }
