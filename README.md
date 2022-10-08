@@ -1,7 +1,7 @@
 # Employee-App
 Assignment 1 for Software Development Tools
 ## App Description
-This is a console Employee App written in Kotlin. 
+This is a console Employee App written in Kotlin. I used Intellij to create and run this app.
 
 During the past 4 weeks I completed the first 3 labs 
 in my Software Development Tools module, where I added
