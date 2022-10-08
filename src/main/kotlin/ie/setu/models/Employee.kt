@@ -11,12 +11,14 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
         'f', 'F' -> "Ms. ${firstName} ${lastName}"
         else -> "${firstName} ${lastName}"
     }
+
     fun getMonthlySalary() = roundToTwoDecimalPlaces(grossSalary / 12)
     fun getMonthlyPaye() = roundToTwoDecimalPlaces(getMonthlySalary() * (payePercentage / 100))
     fun getMonthlyPrsi() = roundToTwoDecimalPlaces(getMonthlySalary() * (prsiPercentage / 100))
     fun getGrossPay() = roundToTwoDecimalPlaces(getMonthlySalary() + (annualBonus / 12))
     fun getTotalDeductions() = roundToTwoDecimalPlaces(getMonthlyPrsi() + getMonthlyPaye() + ctwS)
     fun getMonthlyNetPay() = roundToTwoDecimalPlaces(roundToTwoDecimalPlaces(getGrossPay() - getTotalDeductions()))
+
     fun getEmployeeInfo() : String {
         val blue = "\u001b[34m"
         val black = "\u001b[30m"
@@ -53,6 +55,7 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
      $blue|==================================================================|$reset 
      """
     }
+
     override fun toString(): String {
         val blue = "\u001b[34m"
         val bold = "\u001b[1m"

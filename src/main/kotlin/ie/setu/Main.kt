@@ -184,12 +184,14 @@ fun sortMenu() : Int {
     val reset = "\u001b[0m"
     print("\n")
     print(""" 
-         |   $backgroundBlue$black ️   $bold$black  Sort & Filter Employee Menu      $reset 
-         |   $backgroundBlue   $reset 1 → 💰Sort by salary             $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 2 → 📝Sort by name               $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 3 → ☑️Filter by last name        $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 0 → 👋Exit                       $backgroundBlue   $reset
-         |   $backgroundBlue                   💼                   $reset
+         |   $backgroundBlue$black ️   $bold$black     Sort & Filter Employee Menu           $reset 
+         |   $backgroundBlue   $reset 1 →$bold 💰Sort salaries by:$reset high to low      $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 2 →$bold 💰Sort salaries by:$reset low to high      $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 3 → 📝Sort names in alphabetical order   $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 4 → ☑️Filter surnames containing Roche   $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 5 → ☑️Filter surnames beginning with B   $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 0 → 👋Exit                               $backgroundBlue   $reset
+         |   $backgroundBlue                       💼                       $reset
          |   
          |   Enter Option: """.trimMargin())
 
@@ -203,9 +205,11 @@ fun sortMenuInput() {
     do {
         input = sortMenu()
         when (input) {
-            1 -> sortSalaries()
-            2 -> sortEmployeeNames()
-            3 -> filterNames()
+            1 -> sortSalariesHighToLow()
+            2 -> sortSalariesLowToHigh()
+            3 -> sortEmployeeNames()
+            4 -> filterNames()
+            5 -> filterNames2()
             -99 -> dummyData()
             0 -> logger.info { "Exiting Sort & Filter Employee Menu\n" } //println("Exiting App, thank you for using!")
             else -> logger.info{"Invalid Option\n"}
@@ -223,11 +227,18 @@ fun sortEmployeeNames(){
 
 }
 
-//sort employees by lowest to highest Gross Salary
-fun sortSalaries(){
-    logger.info{"Sorting employees by lowest to highest Gross Salary\n"}
+//sort employees by lowest to highest gross salary earnings
+fun sortSalariesLowToHigh(){
+    logger.info{"Sorting employees by lowest to highest Gross Salary earnings\n"}
     return employees.sortSalary().forEach{println(it)}
 }
+
+//sort employees by highest to lowest gross salary earnings
+fun sortSalariesHighToLow(){
+    logger.info{"Sorting employees by lowest to highest Gross Salary earnings\n"}
+    return employees.sortSalary2().forEach{println(it)}
+}
+
 
 //filter code reference: https://reader.tutors.dev/#/lab/sdt-sept-2022.netlify.app/topic-03-kotlin-and-gradle/unit-02-labs/book-01-classes-and-collections/05
 
@@ -239,6 +250,13 @@ fun filterNames(){
         .forEach { println(it) }
 }
 
+//filter and find employees with surnames that begin with the letter B
+fun filterNames2(){
+    logger.info{"Filtering employees with surnames that begin with the letter B\n"}
+    employees.filterName()
+        .filter {it.lastName.contains("B" )}
+        .forEach { println(it) }
+}
 internal fun getEmployeeById(): Employee? {
     print("   Enter the employee id to search by: ")
     val employeeID = readLine()!!.toInt()

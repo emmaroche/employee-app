@@ -3,22 +3,28 @@ import ie.setu.models.Employee
 import ie.setu.utils.Utilities.isValidListIndex
 
 var lastId = 0
+
 internal fun getId(): Int {
     return lastId++
 }
+
 class EmployeeAPI {
 
     private val employees = ArrayList<Employee>()
+
     fun findAll(): List<Employee> {
         return employees
     }
+
     fun findOne(id: Int): Employee? {
         return employees.find { p -> p.employeeId == id }
     }
+
     fun create(employee: Employee) {
         employee.employeeId = getId()
         employees.add(employee)
     }
+
     fun findName(name: String): Employee? {
         return employees.find { p -> p.firstName == name }
     }
@@ -28,10 +34,17 @@ class EmployeeAPI {
         val sortedEmployeeSecondNames = employees.sortedBy {it.lastName}
         return sortedEmployeeSecondNames
     }
+
     fun sortSalary(): List<Employee> {
         val sortedEmployeeSalaries = employees.sortedBy {it.grossSalary}
         return sortedEmployeeSalaries
     }
+
+    fun sortSalary2(): List<Employee> {
+        val sortedEmployeeSalaries2 = employees.sortedByDescending  {it.grossSalary}
+        return sortedEmployeeSalaries2
+    }
+
     fun filterName(): List<Employee> {
         val filterByName = employees.sortedBy {it.lastName}
         return filterByName
@@ -65,14 +78,17 @@ class EmployeeAPI {
             employees.removeAt(indexToDelete)
         } else null
     }
+
     fun findEmployee(index: Int): Employee? {
         return if (isValidListIndex(index, employees)) {
             employees[index]
         } else null
     }
+
     fun isValidIndex(index: Int): Boolean {
         return isValidListIndex(index, employees)
     }
+
     fun numberOfEmployees(): Int = employees.size
 
 }
