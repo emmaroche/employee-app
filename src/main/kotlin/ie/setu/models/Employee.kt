@@ -61,7 +61,7 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
         val bold = "\u001b[1m"
         val reset = "\u001b[0m"
         return "\n  $blue$bold Employee ID: $reset ${employeeId} \t $blue$bold Name: $reset  $firstName $lastName ($gender)" +
-                "\n   -----------------------------------------" + " \n  $blue Gross Salary: $reset $grossSalary " +
+                "\n   -----------------------------------------" + " \n  $blue$bold Gross Salary: $reset $grossSalary " +
                 "|$blue$bold PAYE Percentage: $reset $payePercentage |$blue$bold PRSI Percentage: $reset $prsiPercentage " +
                 "|$blue$bold Annual Bonus: $reset $annualBonus |$blue$bold Cycle To Work MonthlyDeduction: $reset $ctwS \n "
     }

@@ -27,7 +27,7 @@ fun menu() : Int {
     val reset = "\u001b[0m"
 
     print(""" 
-         |   $backgroundBlue$black ️         $bold$black   Employee Menu             $reset 
+         |   $backgroundBlue$black ️         $bold$black  Employee Menu              $reset 
          |   $backgroundBlue   $reset 1 → 👩‍💼Add Employee               $backgroundBlue   $reset
          |   $backgroundBlue   $reset 2 → ✏️Update Employee            $backgroundBlue   $reset
          |   $backgroundBlue   $reset 3 → 🗑Delete Employee            $backgroundBlue   $reset
@@ -67,7 +67,7 @@ fun start() {
 }
 
 fun addEmployee(){
-    logger.info { "\nYou are adding a new Employee to the list\n" }
+    logger.info { "You are adding a new Employee to the list\n" }
     print("\n" )
     print("   Enter First name: ")
     val firstName = readLine().toString()
@@ -93,11 +93,11 @@ fun addEmployee(){
 
 //update employee
 fun updateEmployee() {
-    logger.info { "updateEmployee() function invoked\n" }
+    logger.info { "Updating an employee\n" }
     listEmployees()
     if (employees.numberOfEmployees() > 0) {
         // only ask the user to choose the employee if employee exists
-        val indexToUpdate = readNextInt("Enter the ID of the Employee to update: ")
+        val indexToUpdate = readNextInt("   Enter the ID of the Employee you wish to update: ")
         if (employees.isValidIndex(indexToUpdate)) {
             print("Enter First name: ")
             val firstName = readLine().toString()
@@ -120,33 +120,35 @@ fun updateEmployee() {
 
             // pass the index of the employee and the new employee details to EmployeeAPI for updating and check for success.
             if (employees.updateEmployee(indexToUpdate, Employee(firstName, lastName, gender, employeeId, grossSalary,payePercentage, prsiPercentage, annualBonus, ctwS))) {
-                println("Employee information updated successfully")
+                logger.info{"Employee information updated successfully\n"}
             } else {
                 logger.info { "Update Failed\n" }
             }
         } else {
-            logger.info{"There are no employees for this index number\n"}
+            logger.info{"There are no employees matching this ID\n"}
         }
     }
 }
 
 //delete employee
 fun deleteEmployee() {
+    logger.info { "Deleting an employee\n" }
     listEmployees()
     if (employees.numberOfEmployees() > 0) {
         // only ask the user to choose the note to delete if notes exist
-        val indexToDelete = readNextInt("Enter the ID of the Employee to delete: ")
+        val indexToDelete = readNextInt("   Enter the ID of the Employee you wish to delete: ")
         // pass the index of the note to EmployeeAPI for deleting and check for success.
         val employeeToDelete = employees.deleteEmployee(indexToDelete)
         if (employeeToDelete != null) {
             logger.info{"Delete Successful! Deleted Employee: ${employeeToDelete.getFullEmployeeName()}\n"}
         } else {
-            logger.info{"Delete NOT Successful"}
+            logger.info{"Delete NOT Successful\n"}
         }
     }
 }
 
 fun listEmployees(){
+    logger.info{"Listing all employees\n"}
     val backgroundBlue = "\u001b[44m"
     val black = "\u001b[30m"
     val bold = "\u001b[1m"
@@ -159,6 +161,8 @@ fun listEmployees(){
 
 //search employee by ID
 fun searchByID() {
+    logger.info{"You are searching for an employee by ID\n"}
+    print("\n")
     val employee = getEmployeeById()
     if (employee == null)
         logger.info{"No employee found\n"}
@@ -168,12 +172,20 @@ fun searchByID() {
 
 //search employee by name
 fun searchByName() {
+    logger.info{"You are searching for an employee by first name\n"}
+    print("\n")
     val employeeName = getEmployeeByName()
 
     if (employeeName == null)
         logger.info{"No employee found\n"}
     else
         println(employeeName)
+}
+
+internal fun getEmployeeByName(): Employee? {
+    print("   Enter the employee name to search by: ")
+    val employeeName = readLine()!!.toString()
+    return employees.findName(employeeName)
 }
 
 //sorting & filtering menu
@@ -184,14 +196,14 @@ fun sortMenu() : Int {
     val reset = "\u001b[0m"
     print("\n")
     print(""" 
-         |   $backgroundBlue$black ️   $bold$black     Sort & Filter Employee Menu           $reset 
-         |   $backgroundBlue   $reset 1 →$bold 💰Sort salaries by:$reset high to low      $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 2 →$bold 💰Sort salaries by:$reset low to high      $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 3 → 📝Sort names in alphabetical order   $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 4 → ☑️Filter surnames containing Roche   $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 5 → ☑️Filter surnames beginning with B   $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 0 → 👋Exit                               $backgroundBlue   $reset
-         |   $backgroundBlue                       💼                       $reset
+         |   $backgroundBlue$black ️   $bold$black      Sort & Filter Employee Menu           $reset 
+         |   $backgroundBlue   $reset 1 →$bold 💰Sort salaries by:$reset high to low       $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 2 →$bold 💰Sort salaries by:$reset low to high       $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 3 → 📝Sort names in alphabetical order    $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 4 → ☑️Filter surnames beginning with B    $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 5 → ☑️Filter names with the surname Roche $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 0 → 👋Exit                                $backgroundBlue   $reset
+         |   $backgroundBlue                       💼                        $reset
          |   
          |   Enter Option: """.trimMargin())
 
@@ -222,7 +234,7 @@ fun sortMenuInput() {
 
 //sort employees names in alphabetical order
 fun sortEmployeeNames(){
-    logger.info{"Sorting employees names in alphabetical order\n"}
+    logger.info{"Sorting employee names in alphabetical order\n"}
     return employees.sortEmployeeNames().forEach{println(it)}
 
 }
@@ -235,42 +247,33 @@ fun sortSalariesLowToHigh(){
 
 //sort employees by highest to lowest gross salary earnings
 fun sortSalariesHighToLow(){
-    logger.info{"Sorting employees by lowest to highest Gross Salary earnings\n"}
+    logger.info{"Sorting employees by highest to lowest Gross Salary earnings\n"}
     return employees.sortSalary2().forEach{println(it)}
 }
 
 
 //filter code reference: https://reader.tutors.dev/#/lab/sdt-sept-2022.netlify.app/topic-03-kotlin-and-gradle/unit-02-labs/book-01-classes-and-collections/05
 
-//filter and find employees with the surname Roche
+//filter and find employees with surnames that begin with the letter B
 fun filterNames(){
+    logger.info{"Filtering employees by surnames that begin with the letter B\n"}
+    employees.filterName()
+        .filter {it.lastName.contains("B" )}
+        .forEach { println(it) }
+}
+
+//filter and find employees with the surname Roche
+fun filterNames2(){
     logger.info{"Filtering employees with the surname Roche\n"}
     employees.filterName()
         .filter {it.lastName.contains("Roche" )}
         .forEach { println(it) }
 }
 
-//filter and find employees with surnames that begin with the letter B
-fun filterNames2(){
-    logger.info{"Filtering employees with surnames that begin with the letter B\n"}
-    employees.filterName()
-        .filter {it.lastName.contains("B" )}
-        .forEach { println(it) }
-}
-internal fun getEmployeeById(): Employee? {
-    print("   Enter the employee id to search by: ")
-    val employeeID = readLine()!!.toInt()
-    return employees.findOne(employeeID)
-}
-
-internal fun getEmployeeByName(): Employee? {
-    print("   Enter the employee name to search by: ")
-    val employeeName = readLine()!!.toString()
-    return employees.findName(employeeName)
-}
-
 //print employee payslips
 fun paySlip(){
+    logger.info{"Printing employee payslip\n"}
+    print("\n")
     val employee = getEmployeeById()
     if (employee != null)
         println(employee.getEmployeeInfo())
@@ -278,6 +281,11 @@ fun paySlip(){
         logger.info{"No employee found linked to that ID\n"}
 }
 
+internal fun getEmployeeById(): Employee? {
+    print("   Enter the employee id to search by: ")
+    val employeeID = readLine()!!.toInt()
+    return employees.findOne(employeeID)
+}
 fun dummyData() {
     employees.create(Employee("Cian", "Burns", 'M', 0, 105655.43, 31.0, 7.5, 2000.0, 25.6))
     employees.create(Employee("Emma", "Roche", 'F', 1, 54255.13, 32.5, 7.0, 1500.0, 55.3))

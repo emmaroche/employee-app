@@ -31,7 +31,7 @@ class EmployeeAPI {
 
     //reference code for sortEmployeeNames(), sortSalary() & filterName(): https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
     fun sortEmployeeNames(): List<Employee> {
-        val sortedEmployeeSecondNames = employees.sortedBy {it.lastName}
+        val sortedEmployeeSecondNames = employees.sortedBy {it.firstName}
         return sortedEmployeeSecondNames
     }
 
