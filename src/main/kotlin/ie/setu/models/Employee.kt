@@ -53,7 +53,6 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
      $blue|==================================================================|$reset 
      """
     }
-
     override fun toString(): String {
         val blue = "\u001b[34m"
         val bold = "\u001b[1m"
@@ -63,8 +62,6 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
                 "|$blue$bold PAYE Percentage: $reset $payePercentage |$blue$bold PRSI Percentage: $reset $prsiPercentage " +
                 "|$blue$bold Annual Bonus: $reset $annualBonus |$blue$bold Cycle To Work MonthlyDeduction: $reset $ctwS \n "
     }
-
-
 
 }
 

@@ -3,11 +3,7 @@ package ie.setu.utils
 import java.lang.NumberFormatException
 import java.util.Scanner
 
-/*
-Code Reference: https://reader.tutors.dev/#/lab/sdt-sept-2022.netlify.app/topic-04-kotlin-and-junit/unit-02-labs/book-01-notes-app-v1/05
-This code is from the section "05: Input Mismatch Exception" in our "4a Notes App labs"
-I decided to add it in this project in order for the update and delete functionality to work
- */
+//Code Reference: https://reader.tutors.dev/#/lab/sdt-sept-2022.netlify.app/topic-04-kotlin-and-junit/unit-02-labs/book-01-notes-app-v1/05
 
 /**
  * This class provides methods for the robust handling of I/O using Scanner.

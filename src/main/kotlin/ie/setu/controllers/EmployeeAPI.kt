@@ -3,11 +3,9 @@ import ie.setu.models.Employee
 import ie.setu.utils.Utilities.isValidListIndex
 
 var lastId = 0
-
 internal fun getId(): Int {
     return lastId++
 }
-
 class EmployeeAPI {
 
     private val employees = ArrayList<Employee>()
@@ -17,9 +15,15 @@ class EmployeeAPI {
     fun findOne(id: Int): Employee? {
         return employees.find { p -> p.employeeId == id }
     }
+    fun create(employee: Employee) {
+        employee.employeeId = getId()
+        employees.add(employee)
+    }
     fun findName(name: String): Employee? {
         return employees.find { p -> p.firstName == name }
     }
+
+    //reference code for sortEmployeeNames(), sortSalary() & filterName(): https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
     fun sortEmployeeNames(): List<Employee> {
         val sortedEmployeeSecondNames = employees.sortedBy {it.lastName}
         return sortedEmployeeSecondNames
@@ -32,15 +36,8 @@ class EmployeeAPI {
         val filterByName = employees.sortedBy {it.lastName}
         return filterByName
     }
-    fun create(employee: Employee) {
-        employee.employeeId = getId()
-        employees.add(employee)
-    }
-/*
-Code Reference for code below this comment: https://github.com/sdrohan/notes-app/blob/master/src/main/kotlin/controllers/NoteAPI.kt
-In order to add update and delete functionality, I took inspiration from certain sections of the referenced code
-and changed it to make it work for what I needed it to do
-*/
+
+    //reference for the code below: https://github.com/sdrohan/notes-app/blob/master/src/main/kotlin/controllers/NoteAPI.kt
     fun updateEmployee(indexToUpdate: Int, employee: Employee?): Boolean {
         // find the employee by the index number
         val foundEmployee = findEmployee(indexToUpdate)
@@ -73,7 +70,6 @@ and changed it to make it work for what I needed it to do
             employees[index]
         } else null
     }
-
     fun isValidIndex(index: Int): Boolean {
         return isValidListIndex(index, employees)
     }

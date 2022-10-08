@@ -6,29 +6,24 @@ import ie.setu.models.Employee
 import mu.KotlinLogging
 import ie.setu.utils.ScannerInput.readNextInt
 
-
 val logger = KotlinLogging.logger {}
-//var employee =  Employee("Joe", "Soap", 'm', 6143, 67543.21, 38.5, 5.2, 1450.50, 54.33)
 var employees = EmployeeAPI()
+
 fun main(args: Array<String>){
     logger.info { "Launching Employee App\n" }
     start()
 }
+
 fun menu() : Int {
 
-    /* Code Reference for what I used to add colour to parts of my functions:
-    https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#deletion
-    To improve the UX/UI of my employee app, I added colours to parts of my menu, payslip and list functions
-    by using and adapting the referenced code to suit my project
-    */
+    //code reference for adding colour to user interface: https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#deletion
 
-    // Displays the colour
+    // displays the colour
     val backgroundBlue = "\u001b[44m"
     val black = "\u001b[30m"
     val bold = "\u001b[1m"
-    val backgroundBrightGreen = "\u001b[42;1m"
 
-   // Resets back to previous colour
+   // resets colour back to whatever it previously was
     val reset = "\u001b[0m"
 
     print(""" 
@@ -47,19 +42,19 @@ fun menu() : Int {
          |   Enter Option: """.trimMargin())
 
     return readLine()!!.toInt()
-
 }
+
 fun start() {
     var input: Int
 
     do {
         input = menu()
         when (input) {
-            1 -> add()
+            1 -> addEmployee()
             2 -> updateEmployee()
             3 -> deleteEmployee()
-            4 -> list()
-            5 -> search()
+            4 -> listEmployees()
+            5 -> searchByID()
             6 -> searchByName()
             7 -> sortMenuInput()
             8 -> paySlip()
@@ -70,7 +65,8 @@ fun start() {
         println()
     } while (input != 0)
 }
-fun add(){
+
+fun addEmployee(){
     logger.info { "\nYou are adding a new Employee to the list\n" }
     print("\n" )
     print("   Enter First name: ")
@@ -93,14 +89,12 @@ fun add(){
     employees.create(Employee(firstName, lastName, gender, 0, grossSalary, payePercentage, prsiPercentage, annualBonus, ctwS))
 }
 
-/*
-Code Reference for updateEmployee() and deleteEmployee(): https://github.com/sdrohan/notes-app/blob/master/src/main/kotlin/Main.kt
-To add the functionality to update and delete employees from the list, I took inspiration from certain sections of the referenced code
-and changed the code around in order to make it work for what I needed it to do
-*/
+//code reference for updateEmployee() and deleteEmployee(): https://github.com/sdrohan/notes-app/blob/master/src/main/kotlin/Main.kt
+
+//update employee
 fun updateEmployee() {
     logger.info { "updateEmployee() function invoked\n" }
-    list()
+    listEmployees()
     if (employees.numberOfEmployees() > 0) {
         // only ask the user to choose the employee if employee exists
         val indexToUpdate = readNextInt("Enter the ID of the Employee to update: ")
@@ -135,8 +129,10 @@ fun updateEmployee() {
         }
     }
 }
+
+//delete employee
 fun deleteEmployee() {
-    list()
+    listEmployees()
     if (employees.numberOfEmployees() > 0) {
         // only ask the user to choose the note to delete if notes exist
         val indexToDelete = readNextInt("Enter the ID of the Employee to delete: ")
@@ -149,7 +145,8 @@ fun deleteEmployee() {
         }
     }
 }
-fun list(){
+
+fun listEmployees(){
     val backgroundBlue = "\u001b[44m"
     val black = "\u001b[30m"
     val bold = "\u001b[1m"
@@ -159,15 +156,18 @@ fun list(){
             .forEach{ println(it) }
 
 }
-fun search() {
+
+//search employee by ID
+fun searchByID() {
     val employee = getEmployeeById()
     if (employee == null)
         logger.info{"No employee found\n"}
     else
         println(employee)
 }
-fun searchByName()
-{
+
+//search employee by name
+fun searchByName() {
     val employeeName = getEmployeeByName()
 
     if (employeeName == null)
@@ -176,6 +176,7 @@ fun searchByName()
         println(employeeName)
 }
 
+//sorting & filtering menu
 fun sortMenu() : Int {
     val backgroundBlue = "\u001b[44m"
     val black = "\u001b[30m"
@@ -213,34 +214,44 @@ fun sortMenuInput() {
     } while (input != 0)
 }
 
-//Code reference for sort by employee name and salary : https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
+//code reference for sort by employee name and salary : https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
+
+//sort employees names in alphabetical order
 fun sortEmployeeNames(){
     logger.info{"Sorting employees names in alphabetical order\n"}
     return employees.sortEmployeeNames().forEach{println(it)}
 
 }
+
+//sort employees by lowest to highest Gross Salary
 fun sortSalaries(){
     logger.info{"Sorting employees by lowest to highest Gross Salary\n"}
     return employees.sortSalary().forEach{println(it)}
 }
 
-//Filter code reference: https://reader.tutors.dev/#/lab/sdt-sept-2022.netlify.app/topic-03-kotlin-and-gradle/unit-02-labs/book-01-classes-and-collections/05
+//filter code reference: https://reader.tutors.dev/#/lab/sdt-sept-2022.netlify.app/topic-03-kotlin-and-gradle/unit-02-labs/book-01-classes-and-collections/05
+
+//filter and find employees with the surname Roche
 fun filterNames(){
     logger.info{"Filtering employees with the surname Roche\n"}
     employees.filterName()
         .filter {it.lastName.contains("Roche" )}
         .forEach { println(it) }
 }
+
 internal fun getEmployeeById(): Employee? {
     print("   Enter the employee id to search by: ")
     val employeeID = readLine()!!.toInt()
     return employees.findOne(employeeID)
 }
+
 internal fun getEmployeeByName(): Employee? {
     print("   Enter the employee name to search by: ")
     val employeeName = readLine()!!.toString()
     return employees.findName(employeeName)
 }
+
+//print employee payslips
 fun paySlip(){
     val employee = getEmployeeById()
     if (employee != null)
@@ -248,6 +259,7 @@ fun paySlip(){
     else
         logger.info{"No employee found linked to that ID\n"}
 }
+
 fun dummyData() {
     employees.create(Employee("Cian", "Burns", 'M', 0, 105655.43, 31.0, 7.5, 2000.0, 25.6))
     employees.create(Employee("Emma", "Roche", 'F', 1, 54255.13, 32.5, 7.0, 1500.0, 55.3))
@@ -255,5 +267,6 @@ fun dummyData() {
     employees.create(Employee("Anita", "Blogs", 'F', 3, 209782.35, 50.0, 9.4, 12000.0, 3.6))
     employees.create(Employee("Philip", "Roche", 'M', 4, 35467.87, 27.8, 6.4, 500.0, 1.2))
 }
+
 fun roundToTwoDecimalPlaces(number: Double) = round(number * 100) / 100
 
