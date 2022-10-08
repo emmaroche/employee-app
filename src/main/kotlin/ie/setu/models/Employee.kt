@@ -35,7 +35,7 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
      $blue|$reset  $backgroundBlue$black Payment Details: $reset                                              $blue|$reset 
      $blue|$reset                                                                  $blue|$reset 
      $blue|  Monthly Salary:$reset ${getGrossPay()}                                         $blue|$reset            
-     $blue|  Bonus:$reset ${roundToTwoDecimalPlaces(annualBonus / 12)}                                                            $blue|$reset 
+     $blue|  Bonus:$reset ${roundToTwoDecimalPlaces(annualBonus / 12)}                                                    $blue|$reset 
      $blue|$reset                                                                  $blue|$reset 
      $blue|==================================================================|$reset                                                                   
      $blue|$reset                                                                  $blue|$reset  
@@ -44,7 +44,7 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
      $blue|  Total Deductions:$reset ${getTotalDeductions()}                                       $blue|$reset 
      $blue|  PAYE:$reset ${getMonthlyPaye()}                                                   $blue|$reset      
      $blue|  PRSI:$reset ${getMonthlyPrsi()}                                                    $blue|$reset 
-     $blue|  Cycle to work:$reset ${ctwS}                                                     $blue|$reset 
+     $blue|  Cycle to work:$reset ${ctwS}                                              $blue|$reset 
      $blue|$reset                                                                  $blue|$reset 
      $blue|==================================================================|$reset 
      $blue|$reset                                                                  $blue|$reset  
@@ -63,5 +63,8 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
                 "|$blue$bold PAYE Percentage: $reset $payePercentage |$blue$bold PRSI Percentage: $reset $prsiPercentage " +
                 "|$blue$bold Annual Bonus: $reset $annualBonus |$blue$bold Cycle To Work MonthlyDeduction: $reset $ctwS \n "
     }
+
+
+
 }
 

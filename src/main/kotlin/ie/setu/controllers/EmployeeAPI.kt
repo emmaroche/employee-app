@@ -20,6 +20,15 @@ class EmployeeAPI {
     fun findName(name: String): Employee? {
         return employees.find { p -> p.firstName == name }
     }
+    fun sortEmployeeNames(): List<Employee> {
+        val sortedEmployeeSecondNames = employees.sortedBy {it.lastName}
+        return sortedEmployeeSecondNames
+    }
+    fun sortSalary(): List<Employee> {
+        val sortedEmployeeSalaries = employees.sortedBy {it.grossSalary}
+        return sortedEmployeeSalaries
+    }
+
     fun create(employee: Employee) {
         employee.employeeId = getId()
         employees.add(employee)

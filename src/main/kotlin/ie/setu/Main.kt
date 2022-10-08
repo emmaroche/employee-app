@@ -39,7 +39,9 @@ fun menu() : Int {
          |   $backgroundBlue   $reset 4 → 📝List All Employees         $backgroundBlue   $reset
          |   $backgroundBlue   $reset 5 → 🔎Search Employees           $backgroundBlue   $reset
          |   $backgroundBlue   $reset 6 → 🔎Search Employees by name   $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 7 → 🖨Print Payslip for Employee $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 7 → 💰Sort by salary             $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 8 → 📝Sort by name               $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 9 → 🖨Print Payslip for Employee $backgroundBlue   $reset
          |   $backgroundBlue   $reset 0 → 👋Exit                       $backgroundBlue   $reset
          |   $backgroundBlue                   💼                   $reset
          |   
@@ -60,7 +62,9 @@ fun start() {
             4 -> list()
             5 -> search()
             6 -> searchByName()
-            7 -> paySlip()
+            7 -> sortSalaries()
+            8 -> sortEmployeeNames()
+            9 -> paySlip()
             -99 -> dummyData()
             0 -> logger.info { "Exiting App, thank you for using!\n" } //println("Exiting App, thank you for using!")
             else -> logger.info{"Invalid Option\n"}
@@ -141,7 +145,7 @@ fun deleteEmployee() {
         // pass the index of the note to EmployeeAPI for deleting and check for success.
         val employeeToDelete = employees.deleteEmployee(indexToDelete)
         if (employeeToDelete != null) {
-            logger.info{"Delete Successful! Deleted Employee: ${employeeToDelete.firstName}"}
+            logger.info{"Delete Successful! Deleted Employee: ${employeeToDelete.getFullEmployeeName()}\n"}
         } else {
             logger.info{"Delete NOT Successful"}
         }
@@ -167,10 +171,22 @@ fun search() {
 fun searchByName()
 {
     val employeeName = getEmployeeByName()
+
     if (employeeName == null)
         logger.info{"No employee found\n"}
     else
         println(employeeName)
+}
+
+//Code reference for sorting by employee name, salary : https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
+fun sortEmployeeNames(){
+    logger.info{"Sorting employees names in alphabetical order\n"}
+    return employees.sortEmployeeNames().forEach{println(it)}
+
+}
+fun sortSalaries(){
+    logger.info{"Sorting employees by lowest to highest Gross Salary\n"}
+    return employees.sortSalary().forEach{println(it)}
 }
 internal fun getEmployeeById(): Employee? {
     print("   Enter the employee id to search by: ")
@@ -190,9 +206,10 @@ fun paySlip(){
         logger.info{"No employee found linked to that ID\n"}
 }
 fun dummyData() {
-    employees.create(Employee("Cian", "Burns", 'M', 1, 35655.43, 31.0, 7.5, 2000.0, 25.6))
-    employees.create(Employee("Emma", "Roche", 'F', 2, 54255.13, 32.5, 7.0, 1500.0, 55.3))
-    employees.create(Employee("John", "Walsh", 'M', 3, 75685.41, 40.0, 8.5, 4500.0, 0.0))
+    employees.create(Employee("Cian", "Burns", 'M', 0, 105655.43, 31.0, 7.5, 2000.0, 25.6))
+    employees.create(Employee("Emma", "Roche", 'F', 1, 54255.13, 32.5, 7.0, 1500.0, 55.3))
+    employees.create(Employee("John", "Walsh", 'M', 2, 75685.41, 40.0, 8.3, 4500.0, 0.0))
+    employees.create(Employee("Anita", "Blogs", 'F', 3, 209782.35, 50.0, 9.4, 12000.0, 3.6))
 }
 fun roundToTwoDecimalPlaces(number: Double) = round(number * 100) / 100
 
