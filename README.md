@@ -19,7 +19,7 @@ functionalities that are listed in the App Functionality section below.
 I included and used gradle/kotlin logging throughout my app and I followed 
 this package structure:
 
-![Package Structure](packageStructure.png)
+![Package Structure](readMe/packageStructure.png)
 
 ## App Functionality
 
@@ -52,20 +52,20 @@ Here are some screenshots of the updated UI:
 
 Employee Menu:
 
-![Employee Menu](employeeMenu.png)
+![Employee Menu](readMe/employeeMenu.png)
 
 I added a new menu called Sorting & Filtering Employee Menu where 
 I followed the same layout as the Employee Menu:
 
-![Sorting & filtering Menu](SortingMenu.png)
+![Sorting & filtering Menu](readMe/SortingMenu.png)
 
 Employee List:
 
-![list of employees:](employeeList.png)
+![list of employees:](readMe/employeeList.png)
 
 Payslip:
 
-![Payslip](payslip.png)
+![Payslip](readMe/payslip.png)
 
 ## References
 As I am only getting familiar with using Kotlin
