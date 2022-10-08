@@ -14,16 +14,17 @@ fun main(args: Array<String>){
     start()
 }
 
+//employee menu
 fun menu() : Int {
 
-    //code reference for adding colour to user interface: https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#deletion
+    //code reference for adding colour to improve UI: https://www.lihaoyi.com/post/BuildyourownCommandLinewithANSIescapecodes.html#deletion
 
     // displays the colour
     val backgroundBlue = "\u001b[44m"
     val black = "\u001b[30m"
     val bold = "\u001b[1m"
 
-   // resets colour back to whatever it previously was
+   // resets colour back to what it previously was
     val reset = "\u001b[0m"
 
     print(""" 
@@ -59,13 +60,14 @@ fun start() {
             7 -> sortMenuInput()
             8 -> paySlip()
             -99 -> dummyData()
-            0 -> logger.info { "Exiting App, thank you for using!\n" } //println("Exiting App, thank you for using!")
+            0 -> logger.info { "Exiting App, thank you for using!\n" }
             else -> logger.info{"Invalid Option\n"}
         }
         println()
     } while (input != 0)
 }
 
+//add employee
 fun addEmployee(){
     logger.info { "You are adding a new Employee to the list\n" }
     print("\n" )
@@ -99,23 +101,23 @@ fun updateEmployee() {
         // only ask the user to choose the employee if employee exists
         val indexToUpdate = readNextInt("   Enter the ID of the Employee you wish to update: ")
         if (employees.isValidIndex(indexToUpdate)) {
-            print("Enter First name: ")
+            print("   Enter First name: ")
             val firstName = readLine().toString()
-            print("Enter Surname: ")
+            print("   Enter Surname: ")
             val lastName = readLine().toString()
-            print("Enter Gender (m/f): ")
+            print("   Enter Gender (m/f): ")
             val gender = readLine()!!.toCharArray()[0]
-            print("Enter Employee ID: ")
+            print("   Enter Employee ID: ")
             val employeeId = readLine()!!.toInt()
-            print("Enter Gross Salary: ")
+            print("   Enter Gross Salary: ")
             val grossSalary = readLine()!!.toDouble()
-            print("Enter PAYE %: ")
+            print("   Enter PAYE %: ")
             val payePercentage = readLine()!!.toDouble()
-            print("Enter PRSI %: ")
+            print("   Enter PRSI %: ")
             val prsiPercentage = readLine()!!.toDouble()
-            print("Enter Annual Bonus: ")
+            print("   Enter Annual Bonus: ")
             val annualBonus= readLine()!!.toDouble()
-            print("Enter Cycle to Work Deduction: ")
+            print("   Enter Cycle to Work Deduction: ")
             val ctwS= readLine()!!.toDouble()
 
             // pass the index of the employee and the new employee details to EmployeeAPI for updating and check for success.
@@ -140,13 +142,16 @@ fun deleteEmployee() {
         // pass the index of the note to EmployeeAPI for deleting and check for success.
         val employeeToDelete = employees.deleteEmployee(indexToDelete)
         if (employeeToDelete != null) {
-            logger.info{"Delete Successful! Deleted Employee: ${employeeToDelete.getFullEmployeeName()}\n"}
+
+            logger.info{"\nDelete Successful! Deleted Employee: ${employeeToDelete.getFullEmployeeName()}\n"}
+
         } else {
             logger.info{"Delete NOT Successful\n"}
         }
     }
 }
 
+//list all employees
 fun listEmployees(){
     logger.info{"Listing all employees\n"}
     val backgroundBlue = "\u001b[44m"
@@ -168,6 +173,12 @@ fun searchByID() {
         logger.info{"No employee found\n"}
     else
         println(employee)
+}
+
+internal fun getEmployeeById(): Employee? {
+    print("   Enter the employee ID to search by: ")
+    val employeeID = readLine()!!.toInt()
+    return employees.findOne(employeeID)
 }
 
 //search employee by name
@@ -230,11 +241,12 @@ fun sortMenuInput() {
     } while (input != 0)
 }
 
-//code reference for sort by employee name and salary : https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
+/*code reference for sorting & filtering: https://reader.tutors.dev/#/lab/sdt-sept-2022.netlify.app/topic-03-kotlin-and-gradle/unit-02-labs/book-01-classes-and-collections/05
+ & https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending */
 
-//sort employees names in alphabetical order
+//sort employee names in alphabetical order
 fun sortEmployeeNames(){
-    logger.info{"Sorting employee names in alphabetical order\n"}
+    logger.info{"Sorting employees first names in alphabetical order\n"}
     return employees.sortEmployeeNames().forEach{println(it)}
 
 }
@@ -250,9 +262,6 @@ fun sortSalariesHighToLow(){
     logger.info{"Sorting employees by highest to lowest Gross Salary earnings\n"}
     return employees.sortSalary2().forEach{println(it)}
 }
-
-
-//filter code reference: https://reader.tutors.dev/#/lab/sdt-sept-2022.netlify.app/topic-03-kotlin-and-gradle/unit-02-labs/book-01-classes-and-collections/05
 
 //filter and find employees with surnames that begin with the letter B
 fun filterNames(){
@@ -274,18 +283,19 @@ fun filterNames2(){
 fun paySlip(){
     logger.info{"Printing employee payslip\n"}
     print("\n")
-    val employee = getEmployeeById()
+    val employee = getEmployeePayslip()
     if (employee != null)
         println(employee.getEmployeeInfo())
     else
         logger.info{"No employee found linked to that ID\n"}
 }
 
-internal fun getEmployeeById(): Employee? {
-    print("   Enter the employee id to search by: ")
+internal fun getEmployeePayslip(): Employee? {
+    print("   Enter the employee ID to view their payslip: ")
     val employeeID = readLine()!!.toInt()
     return employees.findOne(employeeID)
 }
+
 fun dummyData() {
     employees.create(Employee("Cian", "Burns", 'M', 0, 105655.43, 31.0, 7.5, 2000.0, 25.6))
     employees.create(Employee("Emma", "Roche", 'F', 1, 54255.13, 32.5, 7.0, 1500.0, 55.3))
