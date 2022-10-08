@@ -29,7 +29,6 @@ class EmployeeAPI {
         return employees.find { p -> p.firstName == name }
     }
 
-    //reference code for sortEmployeeNames(), sortSalary() & filterName(): https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
     fun sortEmployeeNames(): List<Employee> {
         val sortedEmployeeSecondNames = employees.sortedBy {it.firstName}
         return sortedEmployeeSecondNames

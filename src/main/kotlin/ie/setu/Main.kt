@@ -137,9 +137,9 @@ fun deleteEmployee() {
     logger.info { "Deleting an employee\n" }
     listEmployees()
     if (employees.numberOfEmployees() > 0) {
-        // only ask the user to choose the note to delete if notes exist
+        // only ask the user to choose the employee to delete if the employee exist
         val indexToDelete = readNextInt("   Enter the ID of the Employee you wish to delete: ")
-        // pass the index of the note to EmployeeAPI for deleting and check for success.
+        // pass the ID of the employee to EmployeeAPI for deleting and check for success.
         val employeeToDelete = employees.deleteEmployee(indexToDelete)
         if (employeeToDelete != null) {
 
