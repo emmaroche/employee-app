@@ -37,12 +37,10 @@ fun menu() : Int {
          |   $backgroundBlue   $reset 2 → ✏️Update Employee            $backgroundBlue   $reset
          |   $backgroundBlue   $reset 3 → 🗑Delete Employee            $backgroundBlue   $reset
          |   $backgroundBlue   $reset 4 → 📝List All Employees         $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 5 → 🔎Search Employees           $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 6 → 🔎Search Employees by name   $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 7 → 💰Sort by salary             $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 8 → 📝Sort by name               $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 9 → ☑️Filter by last name        $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 10 → 🖨Print Employee Payslip    $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 5 → 🔎Search Employees by ID     $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 6 → 🔎Search Employees by Name   $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 7 → 📂Sort & Filter Employees    $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 8 → 🖨Print Employee Payslip     $backgroundBlue   $reset
          |   $backgroundBlue   $reset 0 → 👋Exit                       $backgroundBlue   $reset
          |   $backgroundBlue                   💼                   $reset
          |   
@@ -63,10 +61,8 @@ fun start() {
             4 -> list()
             5 -> search()
             6 -> searchByName()
-            7 -> sortSalaries()
-            8 ->sortEmployeeNames()
-            9 -> filterNames()
-            10 -> paySlip()
+            7 -> sortMenuInput()
+            8 -> paySlip()
             -99 -> dummyData()
             0 -> logger.info { "Exiting App, thank you for using!\n" } //println("Exiting App, thank you for using!")
             else -> logger.info{"Invalid Option\n"}
@@ -178,6 +174,43 @@ fun searchByName()
         logger.info{"No employee found\n"}
     else
         println(employeeName)
+}
+
+fun sortMenu() : Int {
+    val backgroundBlue = "\u001b[44m"
+    val black = "\u001b[30m"
+    val bold = "\u001b[1m"
+    val reset = "\u001b[0m"
+    print("\n")
+    print(""" 
+         |   $backgroundBlue$black ️   $bold$black  Sort & Filter Employee Menu      $reset 
+         |   $backgroundBlue   $reset 1 → 💰Sort by salary             $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 2 → 📝Sort by name               $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 3 → ☑️Filter by last name        $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 0 → 👋Exit                       $backgroundBlue   $reset
+         |   $backgroundBlue                   💼                   $reset
+         |   
+         |   Enter Option: """.trimMargin())
+
+    return readLine()!!.toInt()
+
+}
+
+fun sortMenuInput() {
+    var input: Int
+
+    do {
+        input = sortMenu()
+        when (input) {
+            1 -> sortSalaries()
+            2 -> sortEmployeeNames()
+            3 -> filterNames()
+            -99 -> dummyData()
+            0 -> logger.info { "Exiting Sort & Filter Employee Menu\n" } //println("Exiting App, thank you for using!")
+            else -> logger.info{"Invalid Option\n"}
+        }
+        println()
+    } while (input != 0)
 }
 
 //Code reference for sort by employee name and salary : https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
