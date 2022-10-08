@@ -28,7 +28,10 @@ class EmployeeAPI {
         val sortedEmployeeSalaries = employees.sortedBy {it.grossSalary}
         return sortedEmployeeSalaries
     }
-
+    fun filterName(): List<Employee> {
+        val filterByName = employees.sortedBy {it.lastName}
+        return filterByName
+    }
     fun create(employee: Employee) {
         employee.employeeId = getId()
         employees.add(employee)

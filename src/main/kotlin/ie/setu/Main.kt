@@ -41,7 +41,8 @@ fun menu() : Int {
          |   $backgroundBlue   $reset 6 → 🔎Search Employees by name   $backgroundBlue   $reset
          |   $backgroundBlue   $reset 7 → 💰Sort by salary             $backgroundBlue   $reset
          |   $backgroundBlue   $reset 8 → 📝Sort by name               $backgroundBlue   $reset
-         |   $backgroundBlue   $reset 9 → 🖨Print Payslip for Employee $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 9 → ☑️Filter by last name        $backgroundBlue   $reset
+         |   $backgroundBlue   $reset 10 → 🖨Print Employee Payslip    $backgroundBlue   $reset
          |   $backgroundBlue   $reset 0 → 👋Exit                       $backgroundBlue   $reset
          |   $backgroundBlue                   💼                   $reset
          |   
@@ -63,8 +64,9 @@ fun start() {
             5 -> search()
             6 -> searchByName()
             7 -> sortSalaries()
-            8 -> sortEmployeeNames()
-            9 -> paySlip()
+            8 ->sortEmployeeNames()
+            9 -> filterNames()
+            10 -> paySlip()
             -99 -> dummyData()
             0 -> logger.info { "Exiting App, thank you for using!\n" } //println("Exiting App, thank you for using!")
             else -> logger.info{"Invalid Option\n"}
@@ -178,7 +180,7 @@ fun searchByName()
         println(employeeName)
 }
 
-//Code reference for sorting by employee name, salary : https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
+//Code reference for sort by employee name and salary : https://www.codevscolor.com/kotlin-5-ways-sort-list-ascending-descending
 fun sortEmployeeNames(){
     logger.info{"Sorting employees names in alphabetical order\n"}
     return employees.sortEmployeeNames().forEach{println(it)}
@@ -187,6 +189,14 @@ fun sortEmployeeNames(){
 fun sortSalaries(){
     logger.info{"Sorting employees by lowest to highest Gross Salary\n"}
     return employees.sortSalary().forEach{println(it)}
+}
+
+//Filter code reference: https://reader.tutors.dev/#/lab/sdt-sept-2022.netlify.app/topic-03-kotlin-and-gradle/unit-02-labs/book-01-classes-and-collections/05
+fun filterNames(){
+    logger.info{"Filtering employees with the surname Roche\n"}
+    employees.filterName()
+        .filter {it.lastName.contains("Roche" )}
+        .forEach { println(it) }
 }
 internal fun getEmployeeById(): Employee? {
     print("   Enter the employee id to search by: ")
@@ -210,6 +220,7 @@ fun dummyData() {
     employees.create(Employee("Emma", "Roche", 'F', 1, 54255.13, 32.5, 7.0, 1500.0, 55.3))
     employees.create(Employee("John", "Walsh", 'M', 2, 75685.41, 40.0, 8.3, 4500.0, 0.0))
     employees.create(Employee("Anita", "Blogs", 'F', 3, 209782.35, 50.0, 9.4, 12000.0, 3.6))
+    employees.create(Employee("Philip", "Roche", 'M', 4, 35467.87, 27.8, 6.4, 500.0, 1.2))
 }
 fun roundToTwoDecimalPlaces(number: Double) = round(number * 100) / 100
 
