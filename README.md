@@ -69,8 +69,8 @@ Payslip:
 As I am only getting familiar with using Kotlin
 I needed to find resources, outside of class materials, 
 to guide me in finding functions that I could use
-in order to get the functionalities, I wanted to newly add, to work and 
-to use these resources to gain an understanding how these functions work. 
+in order to get the functionalities that I wanted to newly add to work and 
+to use these resources to gain an understanding of how these functions work. 
 
 I did some online research and found the following 
 resources that I incorporated into my app 
