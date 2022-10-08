@@ -27,31 +27,31 @@ class Employee(var firstName: String, var lastName: String, var gender: Char, va
         val reset = "\u001b[0m"
         return """
      $blue|==================================================================|$reset
-     $blue|$reset                        $blue$bold Monthly Payslip $reset                         $blue|$reset
+                               $blue$bold Monthly Payslip $reset                        
      $blue|==================================================================|$reset 
-     $blue|$reset                                                                  $blue|$reset 
-     $blue|$reset  $backgroundBlue$black Employee Name: $reset  ${getFullEmployeeName()}        $backgroundBlue$black Employee ID: $reset ${employeeId}        $blue|$reset 
-     $blue|$reset                                                                  $blue|$reset 
+                                                                       
+       $backgroundBlue$black Employee Name: $reset  ${getFullEmployeeName()}        $backgroundBlue$black Employee ID: $reset ${employeeId}        
+                                                                      
      $blue|==================================================================|$reset 
-     $blue|$reset                                                                  $blue|$reset  
-     $blue|$reset  $backgroundBlue$black Payment Details: $reset                                              $blue|$reset 
-     $blue|$reset                                                                  $blue|$reset 
-     $blue|  Monthly Salary:$reset ${getGrossPay()}                                         $blue|$reset            
-     $blue|  Bonus:$reset ${roundToTwoDecimalPlaces(annualBonus / 12)}                                                    $blue|$reset 
-     $blue|$reset                                                                  $blue|$reset 
+                                                                   
+       $backgroundBlue$black Payment Details: $reset                                             
+                                                                   
+     $blue  Monthly Salary:$reset ${getGrossPay()}                                             
+     $blue  Bonus:$reset ${roundToTwoDecimalPlaces(annualBonus / 12)}                                                  
+                                                                   
      $blue|==================================================================|$reset                                                                   
-     $blue|$reset                                                                  $blue|$reset  
-     $blue|$reset  $backgroundBlue$black Deduction Details: $reset                                            $blue|$reset 
-     $blue|$reset                                                                  $blue|$reset 
-     $blue|  Total Deductions:$reset ${getTotalDeductions()}                                       $blue|$reset 
-     $blue|  PAYE:$reset ${getMonthlyPaye()}                                                   $blue|$reset      
-     $blue|  PRSI:$reset ${getMonthlyPrsi()}                                                    $blue|$reset 
-     $blue|  Cycle to work:$reset ${ctwS}                                              $blue|$reset 
-     $blue|$reset                                                                  $blue|$reset 
+                                                                    
+       $backgroundBlue$black Deduction Details: $reset                                            
+                                                                  
+     $blue  Total Deductions:$reset ${getTotalDeductions()}                                      
+     $blue  PAYE:$reset ${getMonthlyPaye()}                                                     
+     $blue  PRSI:$reset ${getMonthlyPrsi()}                                                    
+     $blue  Cycle to work:$reset ${ctwS}                                              
+                                                                
      $blue|==================================================================|$reset 
-     $blue|$reset                                                                  $blue|$reset  
-     $blue|$reset  $backgroundBlue$black Net pay: $reset ${getMonthlyNetPay()}                                              $blue|$reset 
-     $blue|$reset                                                                  $blue|$reset  
+                                                                     
+       $backgroundBlue$black Net pay: $reset ${getMonthlyNetPay()}                                          
+                                                                     
      $blue|==================================================================|$reset 
      """
     }
